@@ -45,7 +45,7 @@
           <geometry>
             <plane>
               <normal>0 0 1</normal>
-              <size>100 100</size>
+              <size>100 120</size>
             </plane>
           </geometry>
           <material>
@@ -72,6 +72,7 @@
       <ambient>0.9 0.9 0.9 1</ambient>
       <background>0.7 0.7 0.7 1</background>
       <shadows>1</shadows>
+      <grid>0</grid>
     </scene>
     <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
