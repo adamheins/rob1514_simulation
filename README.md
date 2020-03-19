@@ -18,7 +18,7 @@ git clone https://github.com/adamheins/rob1514_simulation
 You need to tell Gazebo where to find the QR code models. Add the following
 line to your `.bashrc`:
 ```
-export GAZEBO_MODEL_PATH=/home/adam/phd/ta/w20/aer1514/project/catkin_ws/src/rob1514_simulation/models:$GAZEBO_MODEL_PATH
+export GAZEBO_MODEL_PATH=<path_to_catkin_ws>/src/rob1514_simulation/models:$GAZEBO_MODEL_PATH
 ```
 
 Build and source the workspace as per usual ROS procedure.
