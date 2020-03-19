@@ -26,7 +26,7 @@
         <technique sid="common">
           <lambert>
             <emission>
-              <color sid="emission">0 0 0 1</color>
+              <color sid="emission">0.9 0.9 0.9 1</color>
             </emission>
             <diffuse>
               <texture texture="Image-sampler" texcoord="UVMap"/>
@@ -41,7 +41,7 @@
   </library_effects>
   <library_images>
     <image id="Image" name="Image">
-      <init_from>Image.png</init_from>
+      <init_from>test.png</init_from>
     </image>
   </library_images>
   <library_materials>

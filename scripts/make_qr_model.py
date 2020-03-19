@@ -1,7 +1,16 @@
 #!/usr/bin/env python3
+import os
 import sys
 
 import qrcode
+
+
+def words():
+    ''' Return list of words for which to make QR code Gazebo models. '''
+    if len(sys.argv) < 2:
+        print('Usage: ./make_qr_model.py word1 [word2 ...]')
+        sys.exit(1)
+    return sys.argv[1:]
 
 
 def make_qr_code(word):
@@ -14,29 +23,45 @@ def make_qr_code(word):
     qr.add_data(word)
     qr.make(fit=True)
     img = qr.make_image()
-    name = word + '.png'
-    img.save(word + '.png')
-    print('Created QR code image: {}'.format(name))
-    return name
+    path = 'qr_{}/{}.png'.format(word, word)
+    img.save(path)
 
-def main():
-    if len(sys.argv) < 2:
-        print('Argument required.')
-        return 1
 
-    word = sys.argv[1]
-
-    img_name = make_qr_code(word)
-    model_name = word + '.dae'
-
+def make_qr_mesh(word):
     # modify the collada data file to take the texture from the newly generated
     # QR code image
-    with open('../models/qr.dae') as f:
+    with open('model_template/qr.dae') as f:
         data = f.read()
-    data = data.replace('Image.png', img_name)
-    with open(model_name, 'w') as f:
+    data = data.replace('{file}', word + '.png')
+    path = 'qr_{}/{}.dae'.format(word, word)
+    with open(path, 'w') as f:
         f.write(data)
-    print('Created QR code model: {}'.format(model_name))
+
+
+def make_gazebo_config(word):
+    # write SDF file
+    with open('model_template/model.sdf') as f:
+        data = f.read()
+    data = data.replace('{name}', word)
+    path = 'qr_{}/model.sdf'.format(word)
+    with open(path, 'w') as f:
+        f.write(data)
+
+    # write config file
+    with open('model_template/model.config') as f:
+        data = f.read()
+    data = data.replace('{name}', word)
+    path = 'qr_{}/model.config'.format(word)
+    with open(path, 'w') as f:
+        f.write(data)
+
+
+def main():
+    for word in words():
+        os.mkdir('qr_' + word)
+        make_qr_code(word)
+        make_qr_mesh(word)
+        make_gazebo_config(word)
 
 
 if __name__ == '__main__':
