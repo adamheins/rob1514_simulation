@@ -1,5 +1,5 @@
 <launch>
-  <arg name="world_file"  default="$(find rob1514_simulation)/worlds/utias.world"/>
+  <arg name="world_file"  default="$(find rob1514_simulation)/worlds/competition.world"/>
 
   <!-- Turtlebot parameters -->
   <arg name="base"      value="kobuki"/> <!-- create, roomba -->
